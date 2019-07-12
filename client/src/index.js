@@ -1,11 +1,17 @@
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import 'bootstrap/dist/css/bootstrap.css';
-import { makeMainRoutes } from './routes';
+import App from './App';
+import { BrowserRouter } from 'react-router-dom' //don't need to specify localhost url in axios http address
 
-const routes = makeMainRoutes();
+//style
+import 'spectre.css/dist/spectre.min.css';
+import 'spectre.css/dist/spectre-icons.css';
+import './index.css';
 
 ReactDOM.render(
-  routes,
-  document.getElementById('root')
-);
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>,
+	document.getElementById('root')
+)

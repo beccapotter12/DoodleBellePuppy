@@ -1,95 +1,83 @@
 import React, { Component } from 'react';
-import { StripeProvider } from 'react-stripe-elements';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
-import config from './assets/store_config';
-import Landing from './components/Landing';
-
-import ScrollToTop from './components/ui/ScrollToTop';
-import Banner from './components/ui/Banner';
-import Products from './components/product/Products';
-import Product from './components/product/Product';
-import Cart from './components/cart/Cart';
-import Checkout from './components/checkout/Checkout';
-import Confirm from './components/checkout/Confirm';
-import Admin from './components/admin/Admin';
-import Login from './components/admin/Login';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: config.colors.primary.main,
-      dark: config.colors.primary.dark,
-      contrastText: config.colors.primary.contrastText
-    },
-    secondary: { main: config.colors.secondary.main },
-  },
-  typography: {
-    fontFamily: [
-      'Raleway',
-      'Roboto',
-      'Helvetica',
-      'sans-serif'
-    ]
-  },
-});
+import axios from 'axios'
+import { Route, Link } from 'react-router-dom'
+// components
+import Signup from './components/sign-up'
+import LoginForm from './components/login-form'
+import Navbar from './components/navbar'
+import Home from './components/home'
 
 class App extends Component {
-  state = {};
+  constructor() {
+    super()
+    this.state = {
+      loggedIn: false,
+      username: null
+    }
+
+    this.getUser = this.getUser.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
+    this.updateUser = this.updateUser.bind(this)
+  }
 
   componentDidMount() {
-    const slug = `${config.store_slug}_products`;
-    const items = JSON.parse(localStorage.getItem(slug));
-    this.setState({ quantity : items ? items.length : 0 })
+    this.getUser()
   }
-  updateNumber = (quantity) => {
-    this.setState({ quantity });
+
+  updateUser (userObject) {
+    this.setState(userObject)
   }
+
+  getUser() {
+    axios.get('/user/').then(response => {
+      console.log('Get user response: ')
+      console.log(response.data)
+      if (response.data.user) {
+        console.log('Get User: There is a user saved in the server session: ')
+
+        this.setState({
+          loggedIn: true,
+          username: response.data.user.username
+        })
+      } else {
+        console.log('Get user: no user');
+        this.setState({
+          loggedIn: false,
+          username: null
+        })
+      }
+    })
+  }
+
   render() {
     return (
-      <StripeProvider apiKey={config.api_key}>
-        <Router>
-          <ScrollToTop>
-            <MuiThemeProvider theme={theme}>
-              <div className={config.store_slug}>
-                <div className="bg" />
-                <Banner quantity={this.state.quantity} config={config} />
-                <Route exact path="/"
-                  render={(props) => <Landing config={config} />}
-                />
-                <Route exact path="/product"
-                  render={(props) => <Products config={config} />}
-                />
-                { config.products.map((product,i) =>
-                    <Route exact key={`route${i}`}
-                      path={`/product/${product.url}`} 
-                      render={(props) => 
-                        <Product product={product} config={config} 
-                          updateNumber={this.updateNumber}
-                        />
-                      }
-                    />
-                  )
-                }
-                <Route exact path="/cart"
-                  render={(props) => <Cart config={config} updateNumber={this.updateNumber} />}
-                />
-                <Route exact path="/checkout"
-                  render={(props) => <Checkout config={config} />}
-                />
-                <Route exact path="/confirm" component={Confirm} />
-                <Route exact path="/admin" component={Admin} />
-                <Route exact path="/login" component={Login} />
-              </div>
-            </MuiThemeProvider>
-          </ScrollToTop>
-        </Router>
-      </StripeProvider>
+      <div className="App">
+   
+        <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
+        {/* greet user if logged in: */}
+        {this.state.loggedIn &&
+          <p>Join the party, {this.state.username}!</p>
+        }
+        {/* Routes to different components */}
+        <Route
+          exact path="/"
+          component={Home} />
+        <Route
+          path="/login"
+          render={() =>
+            <LoginForm
+              updateUser={this.updateUser}
+            />}
+        />
+        <Route
+          path="/signup"
+          render={() =>
+            <Signup/>}
+        />
+
+      </div>
     );
   }
-};
+}
+
 export default App;
