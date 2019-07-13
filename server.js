@@ -1,54 +1,45 @@
-//Requirements
-require('dotenv').config();
-var express = require('express');
-var User = require('./src/models/user');
-var mysql = require('mysql');
-var app = express();
-var PORT = process.env.PORT || 8080;
+const express = require('express')
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const session = require('express-session')
+const dbConnection = require('./database')
+const MongoStore = require('connect-mongo')(session)
+const passport = require('./passport');
+const app = express()
+const PORT = 3001
+// Route requires
+const user = require('./routes/user')
 
-//Passport.js Requirements (middleware for node & auth)
-var session = require('express-session');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-var passport = require('passport');
-var flash = require('connect-flash');
+// MIDDLEWARE
+app.use(morgan('dev'))
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+)
+app.use(bodyParser.json())
 
-// * PassportJS Configuration - Connect to our database
-// * ==========================================
+// Sessions
+app.use(
+	session({
+		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({
+			mongooseConnection: dbConnection
+		}),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
 
-require('./src/config/passport')(passport, User); // * pass passport for configuration
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
 
-// * The Middleware - Set up our app
-// * ==========================================
-app.use(morgan('dev')); // ! log every request to the console
-app.use(cookieParser()); // ! read cookies (needed for auth)
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-app.use(bodyParser.json());
-app.use(express.static('public'));
 
-// * PassportJS Methods
-// * ==========================================
-app.use(session({
-  secret: 'be excellent to each other',
-  resave: true,
-  saveUninitialized: true
-})); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // ! persistent login sessions
-app.use(flash()); // ! use connect-flash for flash messages stored in session
+// Routes
+app.use('/user', user)
 
-//Routes
-//Loading routes and passing in the app & passport
-var apiRoute = require('./src/routes/apiRoutes')(app, passport);
-// var htmlRoute = require('./src/routes/htmlRoutes')(app, passport);
-
-// * Passport strategies
-// * ==========================================
-require('./src/config/passport')(passport, User);
-
+// Starting Server 
 app.listen(PORT, () => {
-  console.log(`listening at ${PORT}`)
+	console.log(`App listening on PORT: ${PORT}`)
 })
