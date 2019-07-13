@@ -38,7 +38,7 @@ const ImgWrapper = styled.div`
 `;
 const Title = styled.div`
   color: black;
-  text-decoration-color: #FF7400;
+  text-decoration-color: #004391;
   margin-top: 10px;
   @media (max-width: 650px) {
     font-size: 14px;
