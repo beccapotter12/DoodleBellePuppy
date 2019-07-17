@@ -187,10 +187,12 @@ export default function PrimarySearchAppBar() {
               inputProps={{ 'aria-label': 'Search' }}
             />
           </div> */}
+          <Button color="inherit">About</Button>
+          <Button color="inherit">Guardian Home</Button>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="Show 1 new item" color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={1} color="secondary">
                 <CartIcon />
               </Badge>
             </IconButton>
