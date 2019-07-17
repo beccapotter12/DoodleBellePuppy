@@ -1,3 +1,4 @@
+//CONNECTION TO MONGODB
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcryptjs');
