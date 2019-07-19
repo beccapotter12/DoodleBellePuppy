@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import ProductList from './ProductList';
-import PageWrapper from '../ui/PageWrapper';
+import ProductList from '../../components/product/ProductList';
+import PageWrapper from '../../components/ui/PageWrapper';
 import Paper from '@material-ui/core/Paper';
+
 
 const Wrapper = styled.div`
   padding: 40px;
@@ -12,15 +13,15 @@ const Wrapper = styled.div`
 `;
 
 const Products = ({ config }) => {
-  return (
-    <PageWrapper>
-      <Paper>
-        <Wrapper>
-          <h2 style={{ marginTop: 0, fontWeight: 600 }}>All Puppies</h2>
-          <ProductList config={config} />
-        </Wrapper>
-      </Paper>
-    </PageWrapper>
-  );
+    return (
+        <PageWrapper>
+            <Paper>
+                <Wrapper>
+                    <h2 style={{ marginTop: 0, fontWeight: 600 }}>All Puppies</h2>
+                    <ProductList config={config} />
+                </Wrapper>
+            </Paper>
+        </PageWrapper>
+    );
 };
 export default Products;
