@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-import NavBar from '../../components/ui/Navbar2/NavTabs';
-// import PuppyPhoto from '../../assets/images/UI Images/HomePagePuppy.jpeg';
+// import PuppyPhoto from '/../../assets/images/UI Images/BannerImage3.png';
 
 class GuardianHome extends Component {
     render() {
         return (
             <div>
-                <NavBar />
-                {/* <PuppyPhoto /> */}
+                {/* <img src={PuppyPhoto} alt="puppy"/> */}
                 <p>This is the Guardian Home page</p>
             </div>
         )

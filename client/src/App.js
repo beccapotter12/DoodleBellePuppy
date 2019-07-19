@@ -3,11 +3,10 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom'
 // components
 
-import Signup from './components/sign-up'
-import LoginForm from './components/login-form'
-import Navbar from './components/ui/Navbar2'
-import Home from './components/home'
-=======
+// import Signup from './components/sign-up'
+// import LoginForm from './components/login-form'
+// import Navbar from './components/ui/Navbar2'
+// import Home from './components/home'
 // import Signup from './components/sign-up'
 // import LoginForm from './components/login-form'
 // import Navbar from './components/navbar'
