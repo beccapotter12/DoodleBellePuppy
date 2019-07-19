@@ -74,8 +74,37 @@ const useStyles = makeStyles(theme => ({
   //   [theme.breakpoints.up('md')]: {
   //     display: 'none',
   //   },
-  // },
-}));
+})
+);
+
+class Navbar extends Component {
+    constructor() {
+        super()
+        this.logout = this.logout.bind(this)
+    }
+
+    logout(event) {
+        event.preventDefault()
+        console.log('logging out')
+        axios.post('/user/logout').then(response => {
+          console.log(response.data)
+          if (response.status === 200) {
+            this.props.updateUser({
+              loggedIn: false,
+              username: null
+            })
+          }
+        }).catch(error => {
+            console.log('Logout error')
+        })
+      }
+
+    render() {
+        const loggedIn = this.props.loggedIn;
+        console.log('navbar render, props: ')
+        console.log(this.props);
+        
+}};
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
@@ -161,6 +190,7 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
+     {loggedIn ? (
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -174,19 +204,6 @@ export default function PrimarySearchAppBar() {
           <Typography className={classes.title} variant="h6" noWrap>
             Doodle Belle Puppies
           </Typography>
-          {/* <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'Search' }}
-            />
-          </div> */}
           <Button color="inherit">About</Button>
           <Button color="inherit">Guardian Home</Button>
           <div className={classes.grow} />
@@ -227,8 +244,8 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </div>
-  );
-}
+    // </div>
+  )}
+  )
 
 export default Navbar;
