@@ -10,7 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import CartIcon from '@material-ui/icons/Cart'; 
+import CartIcon from '@material-ui/icons/Cart';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -78,33 +78,34 @@ const useStyles = makeStyles(theme => ({
 );
 
 class Navbar extends Component {
-    constructor() {
-        super()
-        this.logout = this.logout.bind(this)
-    }
+  constructor() {
+    super()
+    this.logout = this.logout.bind(this)
+  }
 
-    logout(event) {
-        event.preventDefault()
-        console.log('logging out')
-        axios.post('/user/logout').then(response => {
-          console.log(response.data)
-          if (response.status === 200) {
-            this.props.updateUser({
-              loggedIn: false,
-              username: null
-            })
-          }
-        }).catch(error => {
-            console.log('Logout error')
+  logout(event) {
+    event.preventDefault()
+    console.log('logging out')
+    axios.post('/user/logout').then(response => {
+      console.log(response.data)
+      if (response.status === 200) {
+        this.props.updateUser({
+          loggedIn: false,
+          username: null
         })
       }
+    }).catch(error => {
+      console.log('Logout error')
+    })
+  }
 
-    render() {
-        const loggedIn = this.props.loggedIn;
-        console.log('navbar render, props: ')
-        console.log(this.props);
-        
-}};
+  render() {
+    const loggedIn = this.props.loggedIn;
+    console.log('navbar render, props: ')
+    console.log(this.props);
+
+  }
+};
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
@@ -190,62 +191,62 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-     {loggedIn ? (
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Open drawer"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Doodle Belle Puppies
+      {loggedIn ? (
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="Open drawer"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Doodle Belle Puppies
           </Typography>
-          <Button color="inherit">About</Button>
-          <Button color="inherit">Guardian Home</Button>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-label="Show 1 new item" color="inherit">
-              <Badge badgeContent={1} color="secondary">
-                <CartIcon />
-              </Badge>
-            </IconButton>
-            <IconButton aria-label="Show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="Account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="Show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}
-    // </div>
-  )}
-  )
-
+            <Button color="inherit">About</Button>
+            <Button color="inherit">Guardian Home</Button>
+            <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
+              <IconButton aria-label="Show 1 new item" color="inherit">
+                <Badge badgeContent={1} color="secondary">
+                  <CartIcon />
+                </Badge>
+              </IconButton>
+              <IconButton aria-label="Show 17 new notifications" color="inherit">
+                <Badge badgeContent={17} color="secondary">
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+              <IconButton
+                edge="end"
+                aria-label="Account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </div>
+            <div className={classes.sectionMobile}>
+              <IconButton
+                aria-label="Show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </div>
+          </Toolbar>
+        </AppBar>
+      // {renderMobileMenu}
+      // {renderMenu}
+    </div>
+      )}
+      )
+    
 export default Navbar;
