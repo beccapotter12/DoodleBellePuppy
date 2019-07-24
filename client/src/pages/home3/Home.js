@@ -1,6 +1,6 @@
 import React from "react";
-import { MDBEdgeHeader, MDBFreeBird, MDBContainer, MDBCol, MDBRow, MDBCardBody, MDBIcon, MDBNavLink, MDBJumbotron, MDBBtn, MDBCardTitle } from "mdbreact";
-import "./home.css";
+import { MDBEdgeHeader, MDBFreeBird, MDBContainer, MDBCol, MDBRow, MDBCardBody, MDBIcon, MDBNavLink } from "mdbreact";
+import "./HomePage.css";
 
 class HomePage extends React.Component {
   render() {

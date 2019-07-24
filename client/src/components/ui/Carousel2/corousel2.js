@@ -1,6 +1,6 @@
 import React from "react";
 import { MDBCarousel, MDBCarouselCaption, MDBCarouselInner, MDBCarouselItem, MDBView, MDBMask, MDBContainer } from "mdbreact";
-import DocsLink from "./../components/docsLink";
+import DocsLink from "../../docsLink";
 
 const CarouselPage = () => {
   return (

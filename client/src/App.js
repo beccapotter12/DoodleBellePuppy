@@ -1,46 +1,45 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import axios from 'axios'
-// import { Route, Link } from 'react-router-dom'
-// components
+import React, { useState}from 'react';
+import './App.css';
+import Navbar3 from './components/ui/Navbar3/index';
+import Home from './pages/home/Home.js';
+import Products from './components/product/Products';
+// import GuardianHome from './pages/guardianHome/guardianHome';
+// import About from './pages/about/about';
+// import ContactUs from './pages/contactUs/contactUs';
 
-// import Signup from './components/sign-up'
-// import LoginForm from './components/login-form'
-import Navbar3 from './components/ui/Navbar3'
-// import Loading from "./components/ui/Loading";
-// import { useAuth0 } from "./react-auth0-spa";
 
-// import BestSeller from './components/product/BestSeller'
-// import Home from './components/home'
-// // import Signup from './components/sign-up'
-// import LoginForm from './components/login-form'
-// import Navbar from './components/navbar'
-import HomePage from './pages/home/Home.js';
-// // import GuardianHome from './pages/guardian home/GuardianHome';
-// import Shop from './pages/shop/Shop';
+function App() {
 
-const App = () => {
-  // const { loading } = useAuth0();
+  const [displayContent, setDisplayContent] = useState("Home");
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
+  const renderPage = () => {
+    console.log("State-" + displayContent)
+    switch (displayContent) {
+      case "Home":
+        return <Home />
+      case "Products":
+        return <Products />
+      // case "GuardianHome":
+      //   return <GuardianHome />
+      // case "About":
+      //   return <About />
+      // case "ContactUs":
+      //   return <ContactUs />
+      default:
+        return <Home />
+    }
+  }
 
-  return (
-    <Router>
-        <>
-        <Navbar3 />
-        <Switch>
-          <Route path="/" exact component={HomePage} />
-          {/* // <Route path="/buddies" exact component={Buddies} />
-          // <PrivateRoute path="/buddy-profile/" component={BuddyProfile} />
-          // <PrivateRoute path="/dashboard" component={Dashboard} />
-          // <PrivateRoute path="/profile" component={Profile} />
-          // <PrivateRoute path="/goals" component={Goals} /> */}
-        </Switch>
-        </>
-        </Router>
-  )
-        }; 
+      return (
+      
+        <div className="contentSection">
+          <Navbar3
+      displayContent={setDisplayContent}
+      />
+              {renderPage()}
+
+        </div>
+      )
+}
 
 export default App;

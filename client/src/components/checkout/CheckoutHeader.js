@@ -1,7 +1,7 @@
 import React from 'react';
 // Update with React Components 
 import styled from 'styled-components';
-import { withTheme } from '@material-ui/core/styles';
+// import { withTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
 // Fix the Header with our Navbar and Banner Image components
@@ -59,4 +59,4 @@ const CheckoutHeader = ({ pane, text, currentPane, changePane, theme }) => {
     </Flex>
   );
 }
-export default withTheme()(CheckoutHeader);
+export default CheckoutHeader;

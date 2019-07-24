@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { withTheme } from '@material-ui/core/styles';
+// import { withTheme } from '@material-ui/core/styles';
 
 const Wrapper = styled.div`
   display: grid;
@@ -98,4 +98,4 @@ class ProductList extends Component {
     );
   }
 };
-export default withTheme()(ProductList);
+export default ProductList;

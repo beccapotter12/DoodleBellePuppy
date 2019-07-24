@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { withTheme } from '@material-ui/core/styles';
+// import { withTheme } from '@material-ui/core/styles';
 
 const Wrapper = styled.div`
   margin-bottom: 30px;
@@ -31,4 +31,4 @@ const Breadcrumb = ({ product, theme }) => {
     </Wrapper>
   );
 };
-export default withTheme()(Breadcrumb);
+export default Breadcrumb;

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 // update with React Bootstrap components 
-import { withTheme } from '@material-ui/core/styles';
+// import { withTheme } from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
 
@@ -122,4 +122,4 @@ class CartTable extends Component {
     );
   }
 };
-export default withTheme()(CartTable);
+export default CartTable;

@@ -6,7 +6,7 @@ import {
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
-class NavbarPage extends Component {
+class Navbar3 extends Component {
     state = {
         isOpen: false
     };
@@ -34,7 +34,7 @@ class NavbarPage extends Component {
                             <MDBNavLink to="../../../pages/guardian home/GuardianHome.js">Guardian Home</MDBNavLink>
                         </MDBNavItem>
                         <MDBNavItem>
-                            <MDBNavLink to="../../../pages/shop/Shop.js">Shop</MDBNavLink>
+                            <MDBNavLink to="../../product/Products.js">Shop</MDBNavLink>
                         </MDBNavItem>
                     </MDBNavbarNav>
                     <MDBNavbarNav right>
@@ -67,4 +67,4 @@ class NavbarPage extends Component {
     }
 }
 
-export default NavbarPage;
+export default Navbar3;
